@@ -1,7 +1,9 @@
+import { uuid } from "../../utils/uniqueId.js";
+import { addAccordionWrapper } from "../accordion/accordionTemplate.js";
 export function galleryTemplate(classes, images, header) {
   const gallery = `
-    <div class="gallery ${classes}">
-        <h1>${header}</h1>
+    <div class="gallery ${classes}" id='gallery${uuid()}'>
+        <h2>${header}</h2>
         <img class="img" src="${images[0]}" >
         <img class="img" src="${images[1]}" >
         <img class="img" src="${images[2]}" >
@@ -12,14 +14,16 @@ export function galleryTemplate(classes, images, header) {
 }
 
 export function galleryMenuTemplate() {
-  return `
+  return addAccordionWrapper(
+    "Gallery",
+    `
   <form name="gallery" id="galleryCustomizer">
-    <h5>Gallery</h5>
-    <div>
+    <div class="flex direction-col">
+
+   
       <label for="galleryHeader">Header:</label>
       <input id="gallery" name="header" placeholder="Gallery header" />
-    </div>
-    <div>
+    
       <label for="">Img links:</label>
       <input id="galleryImgLink1" name="imgLink1" placeholder="Img link 1" />
 
@@ -30,10 +34,8 @@ export function galleryMenuTemplate() {
       <input id="galleryImgLink4" name="imgLink4" placeholder="Img link 4" />
 
       <input id="galleryImgLink5" name="imgLink5" placeholder="Img link 5" />
-    </div>
-
-    <div>
-      <div>
+    
+      
         <label for="galleryBackground">Choose background:</label>
 
         <select name="background" id="galleryBackground">
@@ -42,8 +44,7 @@ export function galleryMenuTemplate() {
           <option value="galleryBackgroundBlue">Blue</option>
           <option value="galleryBackgroundOrange">Orange</option>
         </select>
-      </div>
-      <div>
+      
         <label for="galleryHeaderFont">Choose font family:</label>
 
         <select name="headerFont" id="galleryHeaderFont">
@@ -52,10 +53,10 @@ export function galleryMenuTemplate() {
           <option value="galleryHeaderFontCursive">Cursive</option>
           <option value="galleryHeaderFontGill">Gill Sans</option>
         </select>
-      </div>
+      
+        <button type="submit" class="self-center">Add</button>
     </div>
-    <button type="submit">Add</button>
-    <hr />
   </form>
-  `;
+  `
+  );
 }

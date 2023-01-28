@@ -1,10 +1,12 @@
+import { uuid } from "../../utils/uniqueId.js";
+import { addAccordionWrapper } from "../accordion/accordionTemplate.js";
 export function listTemplate(classes, header, items, type) {
   let listItems = "";
   items.forEach((item) => {
     listItems += `<li>${item}</li>`;
   });
   const list = `
-    <div id="list" class='whitetext ${classes}'>
+    <div id="list${uuid()}" class='whitetext list ${classes}'>
       <div id='listWrapper'>
         <h2>${header}</h2>
         <${type}>
@@ -17,9 +19,10 @@ export function listTemplate(classes, header, items, type) {
 }
 
 export function listMenuTemplate() {
-  return `
+  return addAccordionWrapper(
+    "List",
+    `
   <form name="list" id="listCustomizer">
-    <h5>List</h5>
     <div class="flex direction-col">
         <label for="header">List header:</label>
         <input id="header" name="header" placeholder="List header" />
@@ -55,5 +58,6 @@ export function listMenuTemplate() {
     </div>
 
 </form>
-  `;
+  `
+  );
 }
